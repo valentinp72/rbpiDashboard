@@ -1,6 +1,15 @@
 body {
 	padding-top: 50px;
 }
+body:before{
+	display: block;
+	content: " ";
+	height:20px;
+	top: 0;
+	background-color: #596676;
+	position:-webkit-sticky;
+	position:sticky; 
+}
 .starter-template {
 	padding: 40px 15px;
 	text-align: center;
