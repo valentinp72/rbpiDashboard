@@ -11,6 +11,11 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<link rel="apple-touch-icon" href="/images/icon.png">
 		<link rel="apple-touch-startup-image" href="/images/launch.png">
+		 <!-- iPhone 6 startup image -->
+    <link href="/images/launch_750x1294.png"
+          media="(device-width: 375px) and (device-height: 667px)
+                 and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
 		<meta name="apple-mobile-web-app-title" content="Dashboard">
 
 
@@ -24,7 +29,6 @@
 
 	</head>
 	<body>
-
 		<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
