@@ -7,6 +7,14 @@
 
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="apple-touch-icon" href="/images/icon.png">
+		<link rel="apple-touch-startup-image" href="/images/launch.png">
+		<meta name="apple-mobile-web-app-title" content="Dashboard">
+
+
+
 		<title><?php echo $title; ?></title>
 
 		<!-- Bootstrap -->
