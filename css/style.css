@@ -1,0 +1,35 @@
+
+/* Prevent overflow when scrolling */
+.views {
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/* Change navbar to pure white */
+.navbar-inner {
+   background: white;
+}
+
+/* Text positions */
+.left {
+	text-align: left;
+}
+.center {
+	text-align: center;
+}
+.right {
+	text-align: right;
+}
+
+#date_heure {
+	margin: 20px;
+	font-size: 15pt;
+}
+.edit_device {
+	margin-right: 20px;
+	font-size: 20px;
+	color: #d3d3d3;
+}
+.link_color {
+	/*color: #E98602; /* Invert of the real blue color #1679FD, why ??? */
+}
