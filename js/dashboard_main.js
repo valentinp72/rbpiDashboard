@@ -13,15 +13,3 @@ var mainView = dashboard.addView('.view-main', {
 function changeDeviceState(id, state){
 	$$('#device_active_' + id).prop('checked', state);
 }
-
-
-/*$$('.device_switch').on('click', function (e) {
-    var isChecked = $$('input').prop('checked');
-	//alert("hllo" + this.id);
-	$.ajax({
-		url : 'ajax.php', // La ressource ciblée
-		type : 'GET' // Le type de la requête HTTP.
-		data : 'utilisateur=fd';
-	});
-});
-*/
