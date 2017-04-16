@@ -1,3 +1,10 @@
+<?php
+require '_config.php';
+// Get device data
+$query = $DB->query('SELECT * FROM devices WHERE id = ' . $_GET['id']);
+$data = $query->fetch();
+?>
+
 <!-- Top Navbar-->
 <div class="navbar">
   <div class="navbar-inner">
@@ -7,7 +14,7 @@
         <span>Retour</span>
        </a>
     </div>
-    <div class="center sliding">Editer un appareil</div>
+    <div class="center sliding"><?php echo $data['name']; ?></div>
     <div class="right">
     </div>
   </div>
@@ -19,6 +26,8 @@
         <p>EDIT A DEVICE</p>
 		<?php
 			echo $_GET['id'];
+
+			echo $data['name'];
 		?>
       </div>
     </div>

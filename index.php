@@ -1,3 +1,21 @@
+<?php require '_config.php'; ?>
+
+<?php
+
+if (isset($_GET['utilisateur'])) {
+    echo "yeah";
+}
+function select() {
+    echo "The select function is called.";
+    exit;
+}
+
+function insert() {
+    echo "The insert function is called.";
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +54,10 @@
 				</div>
 			</div>
 
+			<script type="text/javascript" src="js/framework7.min.js"></script>
+			<script type="text/javascript" src="js/nobounce.min.js"></script>
+			<script type="text/javascript" src="js/dashboard_main.js"></script>
+
 			<!-- PAGE CONTENT -->
 			<div class="pages navbar-through toolbar-through">
 				<div data-page="index" class="page">
@@ -47,70 +69,43 @@
 						</div>
 
 						<div class="content-block-title">APPAREILS</div>
+
 						<div class="list-block">
+						<form action="device_update.php" method="GET" class="ajax-submit-onchange">
 							<ul>
-								<li>
-									<div class="item-content">
-										<div class="item-inner">
-											<div class="item-title label">Lampe bureau</div>
-											<div class="item-input right">
-												<a class="f7-icons edit_device" href="device_edit.php?id=1">chevron_right</a>
-
-												<label class="label-switch">
-													<input type="checkbox">
-													<div class="checkbox"></div>
-												</label>
+								<?php
+								// LIST ALL DEVICES
+								$query = $DB->query('SELECT * FROM devices');
+								while($data = $query->fetch()) {
+									?>
+									<li>
+										<div class="item-content">
+											<div class="item-inner">
+												<div class="item-title label"><?php echo $data['name']; ?></div>
+												<div class="item-input right">
+													<a class="f7-icons edit_device" href="device_edit.php?id=<?php echo $data['id']; ?>">chevron_right</a>
+													<label class="label-switch">
+														<input
+															type="checkbox"
+															name='<?php echo $data['id']; ?>'
+															value="1"
+															class="device_switch"
+															id="device_active_<?php echo $data['id']; ?>"
+														>
+														<div class="checkbox"></div>
+													</label>
+												</div>
 											</div>
 										</div>
-									</div>
-								</li>
-								<li>
-									<div class="item-content">
-										<div class="item-inner">
-											<div class="item-title label">Lampe chevet</div>
-											<div class="item-input right">
-												<a class="f7-icons edit_device" href="device_edit.php?id=2">chevron_right</a>
-
-												<label class="label-switch">
-													<input type="checkbox">
-													<div class="checkbox"></div>
-												</label>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="item-content">
-										<div class="item-inner">
-											<div class="item-title label">Ventilateur</div>
-											<div class="item-input right">
-												<a class="f7-icons edit_device" href="device_edit.php?id=3">chevron_right</a>
-
-												<label class="label-switch">
-													<input type="checkbox">
-													<div class="checkbox"></div>
-												</label>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="item-content">
-										<div class="item-inner">
-											<div class="item-title label">Raspberry Pi</div>
-											<div class="item-input right">
-												<a class="f7-icons edit_device" href="device_edit.php?id=4">chevron_right</a>
-
-												<label class="label-switch">
-													<input type="checkbox">
-													<div class="checkbox"></div>
-												</label>
-											</div>
-										</div>
-									</div>
-								</li>
-
+									</li>
+								<?php
+										echo '<script type="text/javascript">';
+										echo 'changeDeviceState('.$data['id'].', '.$data['state'].');';
+										echo '</script>';
+									}
+								?>
 							</ul>
+						</form>
 						</div>
 					</div>
 				</div>
@@ -127,12 +122,10 @@
 
 		</div>
 	</div>
-
 	<script type="text/javascript" src="js/framework7.min.js"></script>
 	<script type="text/javascript" src="js/nobounce.min.js"></script>
-	
-	<script type="text/javascript" src="js/dashboard_main.js"></script>
 
+	<script type="text/javascript" src="js/dashboard_main.js"></script>
 	<!-- TIME AND DATE -->
 	<script type="text/javascript">
 		var ctoday = <?php echo time() * 1000 ?>;
