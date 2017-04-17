@@ -2,7 +2,7 @@
 <div class="navbar">
   <div class="navbar-inner">
     <div class="left">
-      <a href="#" class="back link">
+		<a href="#" class="back link" data-ignore-cache="true" data-force="true">
         <i class="icon icon-back"></i>
         <span>Retour</span>
        </a>

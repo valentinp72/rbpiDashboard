@@ -1,11 +1,12 @@
 CREATE TABLE `devices` (
-	`id` INT NOT NULL AUTO_INCREMENT, 
-	`name` VARCHAR(255) NOT NULL,
-	`code` VARCHAR(255) NOT NULL,
-	`state` BOOLEAN NOT NULL,
-	`prog_on_state` BOOLEAN NOT NULL,
-	`prog_on_time` TIME NOT NULL,
-	`prog_off_state` BOOLEAN NOT NULL,
-	`prog_off_time` TIME NOT NULL,
+	`id` INT NOT NULL AUTO_INCREMENT,  -- ID de l'appareil
+	`visible` BOOLEAN NOT NULL,        -- Remplace la suppression d'un appareil en cas d'erreur
+	`name` VARCHAR(255) NOT NULL,      -- Nom de l'appareil
+	`code` VARCHAR(255) NOT NULL,      -- Code spécifique à l'appareil
+	`state` BOOLEAN NOT NULL,          -- Etat de l'appareil
+	`prog_on_state` BOOLEAN NOT NULL,  -- Etat de la programmation d'allumage
+	`prog_on_time` TIME NOT NULL,      -- Heure d'allumage
+	`prog_off_state` BOOLEAN NOT NULL, -- Etat de la programmation d'extinction
+	`prog_off_time` TIME NOT NULL,     -- Heure d'extinction
 	PRIMARY KEY (`id`)
 );

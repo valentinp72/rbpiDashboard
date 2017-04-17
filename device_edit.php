@@ -1,8 +1,10 @@
 <?php
 require '_config.php';
+
 // Get device data
 $query = $DB->query('SELECT * FROM devices WHERE id = ' . $_GET['id']);
 $data = $query->fetch();
+
 ?>
 
 
@@ -10,7 +12,7 @@ $data = $query->fetch();
 <div class="navbar">
 	<div class="navbar-inner">
 		<div class="left">
-			<a href="#" class="back link">
+			<a href="#" class="back link" data-ignore-cache="true" data-force="true">
 				<i class="icon icon-back"></i>
 				<span>Retour</span>
 			</a>
@@ -23,7 +25,7 @@ $data = $query->fetch();
 <div class="pages">
 	<div data-page="adddevice" class="page no-toolbar">
 		<div class="page-content">
-			<form action="device_edit.php" method="POST">
+			<form id="device_edit_form" action="POST_device_edit.php" class="ajax-submit-onchange" method="POST">
 
 				<!-- REGLAGES -->
 
@@ -71,7 +73,6 @@ $data = $query->fetch();
 											<input
 												type="checkbox"
 												name="prog_on_state"
-												id="device_active_100"
 												<?php if($data['prog_on_state']) echo "checked"; ?>>
 											<div class="checkbox"></div>
 										</label>
@@ -86,7 +87,10 @@ $data = $query->fetch();
 								<div class="item-inner">
 									<div class="item-title label">Heure</div>
 									<div class="item-input">
-										<input type="time" class="right" name="prog_on_time" value="<?php echo $data['prog_on_time']; ?>">
+										<label class="time_editor">
+											<div class="time_separator"></div>
+											<input type="time" class="right" name="prog_on_time" value="<?php echo $data['prog_on_time']; ?>" />
+										</label>
 									</div>
 								</div>
 							</div>
@@ -96,13 +100,50 @@ $data = $query->fetch();
 				</div>
 
 
-			</form>
+				<!-- PROGRAMMATION - EXTINCTION -->
 
-			<?php
-			//	echo '<script type="text/javascript">';
-			//	echo "changeDeviceState(1, true);";
-			//	echo '</script>';
-			?>
+				<div class="content-block-title">PROGRAMMATION - EXTINCTION</div>
+				<div class="list-block">
+					<ul>
+						<!-- ACTIF -->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">Actif</div>
+									<div class="item-input right">
+										<label class="label-switch">
+											<input
+												type="checkbox"
+												name="prog_off_state"
+												<?php if($data['prog_off_state']) echo "checked"; ?>>
+											<div class="checkbox"></div>
+										</label>
+									</div>
+								</div>
+							</div>
+						</li>
+
+						<!-- HEURE -->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">Heure</div>
+									<div class="item-input">
+										<label class="time_editor">
+											<div class="time_separator"></div>
+											<input type="time" class="right" name="prog_off_time" value="<?php echo $data['prog_off_time']; ?>" />
+										</label>
+									</div>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+
+				</div>
+
+				<input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+			</form>
 		</div>
 	</div>
 </div>

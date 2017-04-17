@@ -10,6 +10,20 @@ var mainView = dashboard.addView('.view-main', {
     dynamicNavbar: true
 });
 
-function changeDeviceState(id, state){
-	$$('#device_active_' + id).prop('checked', state);
-}
+$$(document).on('click', '.delete_device', function (e){
+//	var id = $$(this).attr('id');
+	alert(id);
+});
+
+// DELETE DEVICES IN THE INDEX PAGE
+$(".delete_device").on('click', function () {
+	// Send request to device_remove.php
+	$.post('device_remove.php', {
+		id: $(this).attr('id'),
+	}, function(error) {
+		// We print the error if there is one
+		if(error){
+			alert(error);
+		}
+	});
+});

@@ -1,21 +1,4 @@
 <?php require '_config.php'; ?>
-
-<?php
-
-if (isset($_GET['utilisateur'])) {
-    echo "yeah";
-}
-function select() {
-    echo "The select function is called.";
-    exit;
-}
-
-function insert() {
-    echo "The insert function is called.";
-    exit;
-}
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +15,8 @@ function insert() {
 	<title>Dashboard</title>
 
 	<link rel="stylesheet" href="css/framework7.ios.min.css">
-	<link rel="stylesheet" href="css/framework7.ios.colors.min.css">
 	<link rel="stylesheet" href="css/framework7-icons.css">
+	<link rel="stylesheet" href="css/framework7.ios.colors.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -56,6 +39,7 @@ function insert() {
 
 			<script type="text/javascript" src="js/framework7.min.js"></script>
 			<script type="text/javascript" src="js/nobounce.min.js"></script>
+			<script type="text/javascript" src="js/jquery.min.js"></script>
 			<script type="text/javascript" src="js/dashboard_main.js"></script>
 
 			<!-- PAGE CONTENT -->
@@ -64,8 +48,24 @@ function insert() {
 					<div class="page-content">
 
 						<div id="date_heure" class="center">
-							<a href="datetime_edit.php" id="date">Date  (problème de javascript)</a><br/>
-							<a href="datetime_edit.php" id="time">Heure (problème de javascript)</a>
+							<?php
+								// Display temp date & time before javascript loading
+
+								setlocale(LC_ALL, 'fr_FR', 'fr_FR.UTF-8');
+
+								$today = getdate();
+
+								$hours = $today['hours'];
+								$minutes = $today['minutes'];
+								$seconds = $today['seconds'];
+
+								$date = strftime("%A %e %B %Y", time());
+								$time = $hours . ":" . $minutes . ":" . $seconds;
+								// Lundi 17 avril 2017
+								// 20:24:03
+							?>
+							<a href="datetime_edit.php" id="date"><?php echo $date; ?></a><br/>
+							<a href="datetime_edit.php" id="time"><?php echo $time; ?></a>
 						</div>
 
 						<div class="content-block-title">APPAREILS</div>
@@ -77,13 +77,14 @@ function insert() {
 								// LIST ALL DEVICES
 								$query = $DB->query('SELECT * FROM devices');
 								while($data = $query->fetch()) {
+									if($data['visible'] == true){
 									?>
-									<li>
-										<div class="item-content">
+									<li class="swipeout">
+										<div class="swipeout-content item-content">
 											<div class="item-inner">
 												<div class="item-title label"><?php echo $data['name']; ?></div>
 												<div class="item-input right">
-													<a class="f7-icons edit_device" href="device_edit.php?id=<?php echo $data['id']; ?>">chevron_right</a>
+													<a href="device_edit.php?id=<?php echo $data['id']; ?>" data-ignore-cache="true" data-force="true"><div class="f7-icons edit_device">chevron_right</div></a>
 													<label class="label-switch">
 														<input
 															type="checkbox"
@@ -98,9 +99,20 @@ function insert() {
 												</div>
 											</div>
 										</div>
+										<div class="swipeout-actions-right">
+											<!-- We add data-close-on-cancel attribute to close swipeout automatically -->
+											<a
+												href="#"
+												id="device_delete_<?php echo $data['id']; ?>"
+												class="swipeout-delete delete_device"
+											>
+												Supprimer l'appareil
+											</a>
+										</div>
 									</li>
 								<?php
 									}
+								}
 								?>
 							</ul>
 						</form>
@@ -122,8 +134,8 @@ function insert() {
 	</div>
 	<script type="text/javascript" src="js/framework7.min.js"></script>
 	<script type="text/javascript" src="js/nobounce.min.js"></script>
-
 	<script type="text/javascript" src="js/dashboard_main.js"></script>
+
 	<!-- TIME AND DATE -->
 	<script type="text/javascript">
 		var ctoday = <?php echo time() * 1000 ?>;
