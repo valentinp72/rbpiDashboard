@@ -91,6 +91,7 @@ function insert() {
 															value="1"
 															class="device_switch"
 															id="device_active_<?php echo $data['id']; ?>"
+															<?php if($data['state']) echo "checked"; ?>
 														>
 														<div class="checkbox"></div>
 													</label>
@@ -99,9 +100,6 @@ function insert() {
 										</div>
 									</li>
 								<?php
-										echo '<script type="text/javascript">';
-										echo 'changeDeviceState('.$data['id'].', '.$data['state'].');';
-										echo '</script>';
 									}
 								?>
 							</ul>

@@ -68,16 +68,17 @@ $data = $query->fetch();
 									<div class="item-title label">Actif</div>
 									<div class="item-input right">
 										<label class="label-switch">
-											<input type="checkbox" name="prog_on_state" id="device_active_100">
+											<input
+												type="checkbox"
+												name="prog_on_state"
+												id="device_active_100"
+												<?php if($data['prog_on_state']) echo "checked"; ?>>
 											<div class="checkbox"></div>
 										</label>
 									</div>
 								</div>
 							</div>
 						</li>
-						<script type="text/javascript">
-						$$('#device_active_100').prop('checked', 1);
-						</script>
 
 						<!-- HEURE -->
 						<li>
