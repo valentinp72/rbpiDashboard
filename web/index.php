@@ -1,4 +1,4 @@
-<?php require '_config.php'; ?>
+<?php require '../config/_config.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +71,7 @@
 						<div class="content-block-title">APPAREILS</div>
 
 						<div class="list-block">
-						<form action="device_update.php" method="GET" class="ajax-submit-onchange">
+						<form action="post_device_update.php" method="GET" class="ajax-submit-onchange">
 							<ul>
 								<?php
 								// LIST ALL DEVICES

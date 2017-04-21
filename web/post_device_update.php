@@ -1,6 +1,6 @@
 <?php
 
-require '_config.php';
+require '../config/_config.php';
 
 //
 // Number of devices in database

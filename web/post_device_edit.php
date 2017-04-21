@@ -1,12 +1,8 @@
 <?php
 
-$file = 'log.txt';
-$current = file_get_contents($file);
-
-
 if(isset($_POST)){
 
-	require '_config.php';
+	require '../config/_config.php';
 
 	//
 	// Get all data
@@ -27,8 +23,6 @@ if(isset($_POST)){
 		$prog_off_state = 1;
 	}
 
-	$current .= "PROG ON STATE : " . $prog_on_state . "\n";
-
 	// Update
 	$query = "UPDATE devices SET
 		name = '". $name ."',
@@ -39,18 +33,11 @@ if(isset($_POST)){
 		prog_off_time = '". $prog_off_time ."'
 		WHERE id = ". $id . ";";
 
-	$current .= $query;
 	$update = $DB->query($query);
-
-
-	$current .= print_r($_POST, true);
-
 
 }
 else {
 	echo "error";
 }
-
-file_put_contents($file, $current);
 
 ?>

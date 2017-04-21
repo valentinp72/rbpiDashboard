@@ -1,5 +1,7 @@
-# rbpi_Dashboard_Web
+# Raspberry Pi Dashboard
 
-Dashboard for an home automation system.
+Dashboard for a home automation system.
 
-http://framework7.io/ --> HTML Framework that looks like iOS
+
+### Credits
+* http://framework7.io/ - iOS like HTML Framework

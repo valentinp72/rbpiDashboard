@@ -18,7 +18,7 @@ $$(document).on('click', '.delete_device', function (e){
 // DELETE DEVICES IN THE INDEX PAGE
 $(".delete_device").on('click', function () {
 	// Send request to device_remove.php
-	$.post('device_remove.php', {
+	$.post('post_device_remove.php', {
 		id: $(this).attr('id'),
 	}, function(error) {
 		// We print the error if there is one

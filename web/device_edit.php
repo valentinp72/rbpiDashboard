@@ -1,5 +1,5 @@
 <?php
-require '_config.php';
+require '../config/_config.php';
 
 // Get device data
 $query = $DB->query('SELECT * FROM devices WHERE id = ' . $_GET['id']);
@@ -25,7 +25,7 @@ $data = $query->fetch();
 <div class="pages">
 	<div data-page="adddevice" class="page no-toolbar">
 		<div class="page-content">
-			<form id="device_edit_form" action="POST_device_edit.php" class="ajax-submit-onchange" method="POST">
+			<form id="device_edit_form" action="post_device_edit.php" class="ajax-submit-onchange" method="POST">
 
 				<!-- REGLAGES -->
 

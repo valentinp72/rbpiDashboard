@@ -1,11 +1,11 @@
 <?php
 
-require '_config.php';
+require '../config/_config.php';
 
 if(!empty($_POST['id'])){
-	// Last value of the device
-	$id = substr($_POST['id'], -1);
-	
+	// Get the id of the device
+	sscanf($_POST['id'], "device_delete_%s", $id);
+
 	if(is_numeric($id)){
 		$update = $DB->query("UPDATE devices SET visible = 0 WHERE id = ".$id.";");
 	}
