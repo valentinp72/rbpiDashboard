@@ -1,9 +1,9 @@
 <?php
-require '../config/_config.php';
+	require '../config/include.php';
 
-// Get device data
-$query = $DB->query('SELECT * FROM devices WHERE id = ' . $_GET['id']);
-$data = $query->fetch();
+	// Get device data
+	$query = $DB->query('SELECT * FROM devices WHERE id = ' . $_GET['id']);
+	$data = $query->fetch();
 
 ?>
 

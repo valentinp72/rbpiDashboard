@@ -1,11 +1,11 @@
 #!/usr/bin/php
 <?php
-/*
- * checker.php - Check if we need to turn on or turn off a device
- *
-*/
+	/*
+		checker.php
+		=> Check if we need to turn on or turn off a device
+	*/
 
-	require '../config/_config.php';
+	require '../config/include.php';
 
 	// Returns all devices that match the $time_columnName, $prog_state and $active
 	// ==> All devices that should be activated of disactivated according to the DB
