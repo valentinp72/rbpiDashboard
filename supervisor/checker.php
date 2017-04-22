@@ -25,24 +25,51 @@
 		return $response->fetchAll();
 	}
 
+	function getIds($devices){
+		$ids = '';
+
+		foreach ($devices as $key => $value) {
+			$ids .= $value['id'] . ",";
+		}
+
+		$ids = rtrim($ids, ',');
+
+		return $ids;
+	}
+
+	function execCommandDotPhp($command, $devicesID, $origin){
+		global $REPERTORY;
+
+		$cmd = $REPERTORY. "supervisor/command.php command=". $command ." devices=" . $devicesID . " origin=" . $origin;
+		echo $cmd . "\n";
+		echo exec($cmd) . "\n";
+	}
+
+
 	$date = getdate();
 	$minuteStart = sprintf("%d:%d:0", $date['hours'], $date['minutes']);
 	$minuteEnd   = sprintf("%d:%d:59", $date['hours'], $date['minutes']);
 
 	// Debug
-	$minuteStart = "19:24:00";
-	$minuteEnd   = "19:24:59";
+	//$minuteStart = "19:24:00";
+	//$minuteEnd   = "19:24:59";
 
 	echo "\nWe are checking for devices between " . $minuteStart . " and " . $minuteEnd . ".\n";
 
 	$devicesMustTurnOn  = getDevices("prog_on_time", $minuteStart, $minuteEnd, "prog_on_state", 0);
 	$devicesMustTurnOff = getDevices("prog_off_time", $minuteStart, $minuteEnd, "prog_off_state", 1);
 
-	echo "\nDevices that must be turned on  : \n";
-	print_r($devicesMustTurnOn);
+	echo "\nDevices that must be turned on  : ";
+	$idsON = getIds($devicesMustTurnOn);
+	echo $idsON . "\n";
+	if(!empty($idsON))
+		execCommandDotPhp("ON", $idsON, "PROG_ON");
 
-	echo "\nDevices that must be turned off : \n";
-	print_r($devicesMustTurnOff);
+	echo "\nDevices that must be turned off : ";
+	$idsOFF = getIds($devicesMustTurnOff);
+	echo $idsOFF . "\n";
+	if(!empty($idsOFF))
+		execCommandDotPhp("OFF", $idsOFF, "PROG_OFF");
 
 	echo "\n";
 ?>
