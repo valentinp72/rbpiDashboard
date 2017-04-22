@@ -106,7 +106,23 @@
 								</div>
 							</div>
 						</li>
-
+						<!-- ALLUMAGE PERSISTANT -->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">Persistant</div>
+									<div class="item-input right">
+										<label class="label-switch">
+											<input
+												type="checkbox"
+												name="prog_on_persistent"
+												<?php if($data['prog_on_persistent']) echo "checked"; ?>>
+											<div class="checkbox"></div>
+										</label>
+									</div>
+								</div>
+							</div>
+						</li>
 					</ul>
 				</div>
 
@@ -155,6 +171,23 @@
 									<div class="item-title label">Code d'éxtinction</div>
 									<div class="item-input">
 										<input class="right" type="text" value="<?php echo $data['prog_off_code']; ?>" name="prog_off_code">
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- EXTINCTION PERSISTANTE -->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">Persistant</div>
+									<div class="item-input right">
+										<label class="label-switch">
+											<input
+												type="checkbox"
+												name="prog_off_persistent"
+												<?php if($data['prog_off_persistent']) echo "checked"; ?>>
+											<div class="checkbox"></div>
+										</label>
 									</div>
 								</div>
 							</div>

@@ -7,10 +7,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<link rel="apple-touch-icon" href="/images/icon.png">
-	<link rel="apple-touch-startup-image" href="/images/launch.png">
+	<link rel="apple-touch-icon" href="images/icon.png">
+	<link rel="apple-touch-startup-image" href="images/launch.png">
 	 <!-- iPhone 6 startup image -->
-	<link href="/images/launch_750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<link href="images/launch_750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
 	<meta name="apple-mobile-web-app-title" content="Dashboard">
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 

@@ -68,14 +68,26 @@
 
 	// Turn on or off all devices
 	foreach ($devices as $id) {
+		// Get device infos
 		$device = getDeviceInfo($id);
 		$code = getCode($device, $origin);
-		$cmd = $REPERTORY. "supervisor/emit " . $command . " " . $code;
-		echo $cmd;
-		echo "\n";
-		echo exec($cmd);
-		echo "\n";
 
+		// Exec the command to transmit the code to the device
+		$cmd = $REPERTORY. "supervisor/emit " . $command . " " . $code;
+		echo $cmd . "\n";
+		echo exec($cmd) . "\n";
+
+		// Switch back to false the prog_x_state if it was not persistant
+		if($origin == "PROG_ON" && $device['prog_on_persistent'] == 0)
+			$update = $DB->query("UPDATE devices SET prog_on_state = 0 WHERE id = ". $id);
+		else if($origin == "PROG_OFF" && $device['prog_off_persistent'] == 0)
+			$update = $DB->query("UPDATE devices SET prog_off_state = 0 WHERE id = ". $id);
+
+		// Turn on or off the device state in DB
+		if($command == "ON")
+			$update = $DB->query("UPDATE devices SET state = 1 WHERE id = ". $id);
+		else
+			$update = $DB->query("UPDATE devices SET state = 0 WHERE id = ". $id);
 	}
 
 	echo "\n";
