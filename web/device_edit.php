@@ -95,6 +95,17 @@
 								</div>
 							</div>
 						</li>
+						<!-- CODE ALLUMAGE -->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">Code d'allumage</div>
+									<div class="item-input">
+										<input class="right" type="text" value="<?php echo $data['prog_on_code']; ?>" name="prog_on_code">
+									</div>
+								</div>
+							</div>
+						</li>
 
 					</ul>
 				</div>
@@ -137,7 +148,17 @@
 								</div>
 							</div>
 						</li>
-
+						<!-- CODE ALLUMAGE -->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">Code d'éxtinction</div>
+									<div class="item-input">
+										<input class="right" type="text" value="<?php echo $data['prog_off_code']; ?>" name="prog_off_code">
+									</div>
+								</div>
+							</div>
+						</li>
 					</ul>
 
 				</div>
