@@ -13,9 +13,12 @@
 	$DB_password = 'PASSWORD_HERE';
 
 	// TIMEZONE
-	$timezone = 'Europe/Paris';
+	$TIMEZONE      = 'Europe/Paris';
+	$NTP_SERVER    = "pool.ntp.org";
+	$NTP_DATE_PATH = "/usr/sbin/ntpdate";
+	$NTP_USER      = "www-data";
 
 	// DEBUG ?
-	$debug = false;
+	$DEBUG = false;
 
 ?>

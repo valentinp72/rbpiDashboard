@@ -27,3 +27,12 @@ $(".delete_device").on('click', function () {
 		}
 	});
 });
+
+
+
+/*
+$$(document).on('click', '.updateTime', function (e){
+//	var id = $$(this).attr('id');
+	alert("hey");
+});
+*/
