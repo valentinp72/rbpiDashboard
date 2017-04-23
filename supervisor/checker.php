@@ -19,6 +19,8 @@
 				AND
 					state = '. $active .'
 				AND
+					visible = 1
+				AND
 					'. $time_columnName .' BETWEEN "'. $time_start .'" AND "'. $time_end .'"
 			');
 

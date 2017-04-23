@@ -6,6 +6,14 @@
 
 	require '../config/include.php';
 
+	function execCommandDotPhp($command, $devicesID, $origin){
+		global $REPERTORY;
+
+		$cmd = $REPERTORY. "supervisor/command.php command=". $command ." devices=" . $devicesID . " origin=" . $origin;
+		echo $cmd . "\n";
+		echo exec($cmd) . "\n";
+	}
+
 	//
 	// Number of devices in database
 	//
@@ -42,7 +50,11 @@
 		if($data['state'] != $devices[$i]){
 			// We changed the device $i
 
-			$update = $DB->query("UPDATE devices SET state = ".$devices[$i]." WHERE id = ".$data['id'].";");
+			if($devices[$i] == 1)
+				execCommandDotPhp("ON", $data['id'], "MANUAL");
+			else
+				execCommandDotPhp("OFF", $data['id'], "MANUAL");
+
 		}
 		$i++;
 	}
