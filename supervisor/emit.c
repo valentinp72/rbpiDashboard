@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <wiringPi.h>
+//#include <wiringPi.h>
 
 // Hard-coded RF signals
 // You can use Arduino/RF_Sniffer to find theses values
@@ -62,7 +62,7 @@ const Devices devices[DEVICES_NB] = {
 
 
 // Send a signal
-void sendSignal(int pin, byte data[]){
+void sendSignal(int pin, const byte data[]){
 	int i;
 
 	printf("Sending a signal...");
@@ -84,17 +84,20 @@ void sendSignal(int pin, byte data[]){
 }
 
 // This function checks for hard-coded devices
-void checkForHardCoded(int pin, byte code[]){
+void checkForHardCoded(int pin, const byte code[]){
 	int i;
 	code += 7; // we already checked the first 7 characters
 
+	printf("We are checking for an hard-coded device called %s...", code);
 	for(i = 0 ; i < DEVICES_NB ; i++){
 		// We found the device in the list
 		if(strcmp(code, devices[i].name) == 0){
+			printf("Found!\n");
 			sendSignal(pin, devices[i].code);
 			return;
 		}
 	}
+	printf("Not found!\n");
 }
 
 void usage(char * name){
