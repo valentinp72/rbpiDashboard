@@ -22,13 +22,15 @@
 	}
 
 	// Get device code according to the origin of the command
-	function getCode($device, $origin){
+	function getCode($device, $origin, $command){
 		if($origin == 'PROG_ON')
 			return $device['prog_on_code'];
 		if($origin == 'PROG_OFF')
 			return $device['prog_off_code'];
 
-		return $device['code'];
+		if($command == 'ON')
+			return $device['code_on'];
+		return $device['code_off'];
 	}
 
 
@@ -70,10 +72,10 @@
 	foreach ($devices as $id) {
 		// Get device infos
 		$device = getDeviceInfo($id);
-		$code = getCode($device, $origin);
+		$code = getCode($device, $origin, $command);
 
 		// Exec the command to transmit the code to the device
-		$cmd = $REPERTORY. "supervisor/emit " . $command . " " . $code;
+		$cmd = "sudo " . $REPERTORY. "supervisor/emit " . $code;
 		echo $cmd . "\n";
 		echo exec($cmd) . "\n";
 

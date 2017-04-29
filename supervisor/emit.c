@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <wiringPi.h>
+#include <wiringPi.h>
 
 // Hard-coded RF signals
 // You can use Arduino/RF_Sniffer to find theses values
@@ -9,8 +9,10 @@
 
 #define PIN_TX      23 // PIN of the transmitter
 #define DEVICES_NB   8 // Number of devices (x2, for 1 device, there is actually 2 codes)
+#define PREFIX_SIZE  7 // Size of the default prefix for hard-coded devices (OUTLET_)
 #define TIME_DELAY 105 // Delay between each upate state of the transmitter
 #define DATA_SIZE  125 // Size of the data
+#define SEND_REPEAT  5 // As we cannot know if the message was received, we send it multiple time
 
 typedef char byte;
 
@@ -21,7 +23,7 @@ typedef struct {
 
 // Table of bytes, that correspond to MCE07G electrical outlets
 // You can get theses values with RF_Sniffer.ino
-// Each device name must start with "OUTLET_"
+// Each device name must start with "OUTLET_" (size of PREFIX_SIZE)
 const Devices devices[DEVICES_NB] = {
 	{
 		"OUTLET_1_ON",
@@ -83,17 +85,24 @@ void sendSignal(int pin, const byte data[]){
 
 }
 
+// We send multiple times the same signal because we don't know if it was received
+void sendSignalR(int pin, const byte data[]){
+	int i;
+	for(i = 0 ; i < SEND_REPEAT ; i++)
+		sendSignal(pin, data);
+}
+
 // This function checks for hard-coded devices
 void checkForHardCoded(int pin, const byte code[]){
 	int i;
-	code += 7; // we already checked the first 7 characters
+	code += PREFIX_SIZE; // we already checked the first 7 characters
 
 	printf("We are checking for an hard-coded device called %s...", code);
 	for(i = 0 ; i < DEVICES_NB ; i++){
 		// We found the device in the list
-		if(strcmp(code, devices[i].name) == 0){
+		if(strcmp(code, devices[i].name + PREFIX_SIZE) == 0){
 			printf("Found!\n");
-			sendSignal(pin, devices[i].code);
+			sendSignalR(pin, devices[i].code);
 			return;
 		}
 	}
@@ -120,7 +129,7 @@ int main(int argc, char * argv[]){
 	if(strncmp(code, "OUTLET_", 7) == 0)
 		checkForHardCoded(PIN_TX, code);
 	else
-		sendSignal(PIN_TX, code);
+		sendSignalR(PIN_TX, code);
 
 
 }
