@@ -47,9 +47,19 @@
 						<li>
 							<div class="item-content">
 								<div class="item-inner">
-									<div class="item-title label">Code</div>
+									<div class="item-title label">Code d'allumage</div>
 									<div class="item-input">
-										<input class="right" type="text" value="<?php echo $data['code']; ?>" name="code">
+										<input class="right" type="text" value="<?php echo $data['code_on']; ?>" name="code_on">
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">Code d'éxtinction</div>
+									<div class="item-input">
+										<input class="right" type="text" value="<?php echo $data['code_off']; ?>" name="code_off">
 									</div>
 								</div>
 							</div>

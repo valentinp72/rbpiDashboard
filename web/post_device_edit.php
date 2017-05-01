@@ -14,7 +14,8 @@
 
 		$id             = $_POST['id'];
 		$name           = $_POST['name'];
-		$code           = $_POST['code'];
+		$code_on        = $_POST['code_on'];
+		$code_off       = $_POST['code_off'];
 
 		$prog_on_state      = 0; // Initialization to 0 because if the checkbox is not checked, it won't exist
 		$prog_on_time       = $_POST['prog_on_time'];
@@ -43,7 +44,8 @@
 		// Update
 		$query = "UPDATE devices SET
 			name = '". $name ."',
-			code = '". $code ."',
+			code_on = '". $code_on ."',
+			code_off = '". $code_off ."',
 
 			prog_on_state = ". $prog_on_state .",
 			prog_on_time = '". $prog_on_time ."',

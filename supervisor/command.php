@@ -5,7 +5,7 @@
 		=> Turn on or off a device
 	*/
 
-	require '../config/include.php';
+	require __DIR__ . '/../config/include.php';
 	$args_requiredNB = 3;
 
 	// Returns all device info that match $id id
@@ -46,11 +46,13 @@
 		$values = array();
 
 		foreach($arguments as $arg){
-   			list($x, $y) = explode('=', $arg);
-   			$values["$x"] = $y;
+   			$elems = explode('=', $arg);
+			if(count($elems) == 2){
+   				$values["$elems[0]"] = $elems[1];
+			}
 		}
 
-		$nb = count($values) - 1;
+		$nb = count($values);
 	}
 
 	$command   = $values['command'];               // ON or OFF

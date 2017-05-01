@@ -5,7 +5,7 @@
 		=> Check if we need to turn on or turn off a device
 	*/
 
-	require '../config/include.php';
+	require __DIR__ . '/../config/include.php';
 
 	// Returns all devices that match the $time_columnName, $prog_state and $active
 	// ==> All devices that should be activated of disactivated according to the DB
