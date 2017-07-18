@@ -55,7 +55,7 @@
 		$nb = count($values);
 	}
 
-	$command   = $values['command'];               // ON or OFF
+	$command   = $values['command'];               // ON, OFF, or INVERT
 	$devices   = explode(',', $values['devices']); // Array of devices IDs
 	$nbDevices = count($devices);                  // Number of devices
 	$origin    = $values['origin'];                // PROG_ON, PROG_OFF, or MANUAL
@@ -65,8 +65,8 @@
 		die($nb . " arguments given, " . $args_requiredNB ." expecting.\n");
 	if(empty($devices))
 		die("No devices given\n");
-	if($command != "ON" && $command != "OFF")
-		die("Non-valid command [ON/OFF]");
+	if($command != "ON" && $command != "OFF" && $command != "INVERT")
+		die("Non-valid command [ON/OFF/INVERT]");
 	if($origin != "PROG_ON" && $origin != "PROG_OFF" && $origin != "MANUAL")
 		die("Non-valid origin [PROG_ON/PROG_OFF/MANUAL]");
 
@@ -74,10 +74,16 @@
 	foreach ($devices as $id) {
 		// Get device infos
 		$device = getDeviceInfo($id);
+
+		if($device['state'] == 0)
+			$command = "ON";
+		else
+			$command = "OFF";
+
 		$code = getCode($device, $origin, $command);
 
 		// Exec the command to transmit the code to the device
-		$cmd = "sudo " . $REPERTORY. "supervisor/emit " . $code;
+		$cmd = "sudo " . $config['repertory'] . "supervisor/emit " . $code;
 		echo $cmd . "\n";
 		echo exec($cmd) . "\n";
 

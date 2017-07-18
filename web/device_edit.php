@@ -5,6 +5,7 @@
 	$query = $DB->query('SELECT * FROM devices WHERE id = ' . $_GET['id']);
 	$data = $query->fetch();
 
+
 ?>
 
 
@@ -64,7 +65,23 @@
 								</div>
 							</div>
 						</li>
+					</ul>
+				</div>
 
+				<div class="content-block-title">AMAZON DASH BUTTON</div>
+				<div class="list-block">
+					<ul>
+						<!-- MAC ADRESS -->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">MAC</div>
+									<div class="item-input">
+										<input class="right" type="text" value="<?php echo $data['button_mac']; ?>" name="button_mac">
+									</div>
+								</div>
+							</div>
+						</li>
 					</ul>
 				</div>
 

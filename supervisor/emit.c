@@ -1,12 +1,17 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <wiringPi.h>
 
 // Hard-coded RF signals
 // You can use Arduino/RF_Sniffer to find theses values
 #include "devices_data.h"
 
+#define FILE_LOCK_R "/tmp/emit_c.lock"
 #define PIN_TX      23 // PIN of the transmitter
 #define DEVICES_NB   8 // Number of devices (x2, for 1 device, there is actually 2 codes)
 #define PREFIX_SIZE  7 // Size of the default prefix for hard-coded devices (OUTLET_)
@@ -113,6 +118,25 @@ void usage(char * name){
 	printf("Usage : %s <RF Code>\n", name);
 }
 
+
+int lockFile = -1;
+
+void setRunning(bool state){
+
+	if(lockFile < 0){
+		printf("Error: lockfile doesn't exist!\n");
+		exit(-1);	
+	}
+
+	if(state == true)
+		lockf(lockFile, F_LOCK, 0);  // lock the file, blocking, if the file is already locked, it will wait to be unlocked
+	else
+		lockf(lockFile, F_ULOCK, 0); // unlock the file
+
+}
+
+
+
 int main(int argc, char * argv[]){
 
 	if(argc != 2){
@@ -121,6 +145,12 @@ int main(int argc, char * argv[]){
 	}
 
 	char * code = argv[1];
+
+	// Open a lock file to prevent multiple executions of this program in the same time
+	lockFile = open(FILE_LOCK_R, O_WRONLY | O_CREAT);	
+	// This function is blocking, it will unblock only when the other same program will stop
+	setRunning(true);
+
 
 	wiringPiSetupGpio();
 	pinMode(PIN_TX, OUTPUT);
@@ -131,5 +161,8 @@ int main(int argc, char * argv[]){
 	else
 		sendSignalR(PIN_TX, code);
 
+
+	setRunning(false); // stop here
+	close(lockFile);
 
 }

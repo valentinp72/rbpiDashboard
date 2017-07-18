@@ -2,7 +2,9 @@ CREATE TABLE `devices` (
 	`id` INT NOT NULL AUTO_INCREMENT,       -- ID de l'appareil
 	`visible` BOOLEAN NOT NULL,             -- Remplace la suppression d'un appareil en cas d'erreur
 	`name` VARCHAR(255) NOT NULL,           -- Nom de l'appareil
-	`code` VARCHAR(255) NOT NULL,           -- Code spécifique à l'appareil
+	`code_on` VARCHAR(255) NOT NULL,        -- Code spécifique à l'appareil
+	`code_off` VARCHAR(255) NOT NULL,       -- Code spécifique à l'appareil
+	`button_mac` VARCHAR(17) NOT NULL,      -- Amazon Dash Button mac address
 	`state` BOOLEAN NOT NULL,               -- Etat de l'appareil
 
 	`prog_on_state` BOOLEAN NOT NULL,       -- Etat de la programmation d'allumage

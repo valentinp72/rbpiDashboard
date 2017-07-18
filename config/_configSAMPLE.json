@@ -1,0 +1,19 @@
+{
+	"repertory": "ENTER DASHBOARD MAIN DIRECTORY LOCATION",
+	
+	"database": {
+		    "host": "IP_ADDRESS_V4 (IP ONLY, NOT AN HOSTNAME)",
+		    "name": "DATABASE_NAME",
+		"username": "USERNAME_HERE",
+		"password": "PASSWORD_HERE"
+	},
+
+	"ntp": {
+		 "timezone": "Europe/Paris",
+		   "server": "pool.ntp.org",
+		"date_path": "/usr/sbin/ntpdate",
+		     "user": "www-data" 
+	},
+
+	"debug": false 
+}

@@ -40,6 +40,6 @@
 *.DS_Store
 
 # Others
-_config.php
+_config.json
 
 

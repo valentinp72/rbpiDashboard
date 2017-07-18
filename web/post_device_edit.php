@@ -16,6 +16,7 @@
 		$name           = $_POST['name'];
 		$code_on        = $_POST['code_on'];
 		$code_off       = $_POST['code_off'];
+		$button_mac     = $_POST['button_mac'];
 
 		$prog_on_state      = 0; // Initialization to 0 because if the checkbox is not checked, it won't exist
 		$prog_on_time       = $_POST['prog_on_time'];
@@ -46,6 +47,7 @@
 			name = '". $name ."',
 			code_on = '". $code_on ."',
 			code_off = '". $code_off ."',
+			button_mac = '". $button_mac ."',
 
 			prog_on_state = ". $prog_on_state .",
 			prog_on_time = '". $prog_on_time ."',

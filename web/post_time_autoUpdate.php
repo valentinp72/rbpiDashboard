@@ -6,7 +6,7 @@
 
 	require '../config/include.php';
 
-	$command = "sudo -u " . $NTP_USER . " " . $NTP_DATE_PATH . " -u " . $NTP_SERVER;
+	$command = "sudo -u " . $config['ntp']['user'] . " " . $config['ntp']['date_path'] . " -u " . $config['ntp']['server'];
 
 	$resultat = exec($command, $output, $return);
 

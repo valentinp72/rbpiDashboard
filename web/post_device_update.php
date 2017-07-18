@@ -7,9 +7,9 @@
 	require '../config/include.php';
 
 	function execCommandDotPhp($command, $devicesID, $origin){
-		global $REPERTORY;
+		global $config;
 
-		$cmd = $REPERTORY. "supervisor/command.php command=". $command ." devices=" . $devicesID . " origin=" . $origin;
+		$cmd = $config['repertory']. "supervisor/command.php command=". $command ." devices=" . $devicesID . " origin=" . $origin;
 		echo $cmd . "\n";
 		echo exec($cmd) . "\n";
 	}
@@ -21,7 +21,7 @@
 	$data = $query->fetch();
 
 	$nbDevices = $data[0];
-	$current .= $nbDevices . " devices in database\n";
+	$current = $nbDevices . " devices in database\n";
 
 	//
 	// Construction of the devices states
