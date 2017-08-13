@@ -1,0 +1,17 @@
+[Unit]
+Description=Amazon Dash Buttons server
+Requires=After=mysql.service
+
+[Service]
+ExecStart=/usr/local/bin/node /var/www/html/supervisor/buttonsServer.js
+WorkingDirectory=/var/www/html/supervisor
+Restart=always
+RestartSec=10
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=buttons-server
+Environment=NODE_ENV=production PORT=1337
+
+[Install]
+WantedBy=multi-user.target
