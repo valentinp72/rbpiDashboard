@@ -63,6 +63,9 @@
 
 		$update = $DB->query($query);
 
+		// Restart the button server:
+		exec("sudo -u " . $config['ntp']['user'] . " systemctl restart buttonsServer.service");
+
 	}
 	else {
 		echo "error";

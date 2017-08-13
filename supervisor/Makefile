@@ -1,6 +1,7 @@
 LIB = -lwiringPi
 
 all: emit
+	cp buttonsServer.service /etc/systemd/system/buttonsServer.service
 
 emit: emit.o
 	gcc $^ -o $@ $(LIB)
