@@ -2,6 +2,11 @@
 
 Dashboard for a home automation system.
 
+![Home screen](/Users/Valentin/git/rbpi_Dashboard/documents/design/dashboard_home.PNG)
+
+
+![Edit screen](/Users/Valentin/git/rbpi_Dashboard/documents/design/dashboard_edit.PNG)
+
 ### Requirements
 
 * `apache2`, `MySQL`, `PHP`
