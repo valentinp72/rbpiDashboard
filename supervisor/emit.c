@@ -10,6 +10,7 @@
 // Hard-coded RF signals
 // You can use Arduino/RF_Sniffer to find theses values
 #include "devices_data.h"
+#include "RCSwitch.h"
 
 #define FILE_LOCK_R "/tmp/emit_c.lock"
 #define PIN_TX      23 // PIN of the transmitter
@@ -67,8 +68,22 @@ const Devices devices[DEVICES_NB] = {
 	}
 };
 
+// Send a signal (using rc-switch)
+int codesend(int pin, const byte data[]) {
 
-// Send a signal
+    int code = atoi(data);
+
+    printf("Sending code: %i\n", code);
+    RCSwitch mySwitch = RCSwitch();
+    mySwitch.enableTransmit(pin);
+
+    mySwitch.send(code, 24);
+
+    return 0;
+
+}
+
+// Send a signal (low-level library)
 void sendSignal(int pin, const byte data[]){
 	int i;
 
@@ -159,7 +174,8 @@ int main(int argc, char * argv[]){
 	if(strncmp(code, "OUTLET_", 7) == 0)
 		checkForHardCoded(PIN_TX, code);
 	else
-		sendSignalR(PIN_TX, code);
+		codesend(PIN_TX, code);	
+	//sendSignalR(PIN_TX, code);
 
 
 	setRunning(false); // stop here
