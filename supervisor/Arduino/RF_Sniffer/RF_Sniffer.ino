@@ -20,8 +20,8 @@
 
 #include "devices_data.h"
 
-#define RX  A0 /*    Receiver pin */
-#define TX   4 /* Transmitter pin */
+#define RX  2 /*    Receiver pin */
+#define TX  5 /* Transmitter pin */
 
 SerialCommand SCmd;
 
