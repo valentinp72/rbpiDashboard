@@ -13,12 +13,13 @@
 #include "RCSwitch.h"
 
 #define FILE_LOCK_R "/tmp/emit_c.lock"
-#define PIN_TX      23 // PIN of the transmitter
-#define DEVICES_NB   8 // Number of devices (x2, for 1 device, there is actually 2 codes)
-#define PREFIX_SIZE  7 // Size of the default prefix for hard-coded devices (OUTLET_)
-#define TIME_DELAY 105 // Delay between each upate state of the transmitter
-#define DATA_SIZE  125 // Size of the data
-#define SEND_REPEAT  5 // As we cannot know if the message was received, we send it multiple time
+#define PIN_TX         23 // PIN of the transmitter
+#define DEVICES_NB      8 // Number of devices (x2, for 1 device, there is actually 2 codes)
+#define PREFIX_SIZE     7 // Size of the default prefix for hard-coded devices (OUTLET_)
+#define TIME_DELAY    105 // Delay between each upate state of the transmitter
+#define DATA_SIZE     125 // Size of the data
+#define SEND_REPEAT     8 // As we cannot know if the message was received, we send it multiple time
+#define TIME_BTWM_SNDS 50 // Delay between each send of messages (in microseconds) 
 
 typedef char byte;
 
@@ -108,8 +109,10 @@ void sendSignal(int pin, const byte data[]){
 // We send multiple times the same signal because we don't know if it was received
 void sendSignalR(int pin, const byte data[]){
 	int i;
-	for(i = 0 ; i < SEND_REPEAT ; i++)
+	for(i = 0 ; i < SEND_REPEAT ; i++) {
 		sendSignal(pin, data);
+		delayMicroseconds(TIME_BTWM_SNDS);
+	}	
 }
 
 // This function checks for hard-coded devices
