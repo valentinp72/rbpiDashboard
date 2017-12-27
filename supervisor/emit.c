@@ -18,8 +18,8 @@
 #define PREFIX_SIZE     7 // Size of the default prefix for hard-coded devices (OUTLET_)
 #define TIME_DELAY    105 // Delay between each upate state of the transmitter
 #define DATA_SIZE     125 // Size of the data
-#define SEND_REPEAT     8 // As we cannot know if the message was received, we send it multiple time
-#define TIME_BTWM_SNDS 50 // Delay between each send of messages (in microseconds) 
+#define SEND_REPEAT    10 // As we cannot know if the message was received, we send it multiple time
+#define TIME_BTWM_SNDS 75 // Delay between each send of messages (in microseconds) 
 
 typedef char byte;
 
